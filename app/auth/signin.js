@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 export default function LoginPage() {
@@ -63,12 +64,14 @@ export default function LoginPage() {
                   Forgot your password?
                 </a>
               </div>
-              <button
-                className="w-full h-12 rounded-3xl bg-gradient-to-r from-[#dab866] 
-                to-[#be9337] py-2 text-white font-medium hover:bg-yellow-600 "
-              >
-                Sign In
-              </button>
+              <Link href="/Dashboard">
+                <button
+                  className="w-full h-12 rounded-3xl bg-gradient-to-r from-[#dab866] 
+                to-[#be9337] py-2 text-white font-medium hover:bg-yellow-600"
+                >
+                  Sign In
+                </button>
+              </Link>
             </form>
 
             {/* <div className="my-6 flex items-center">

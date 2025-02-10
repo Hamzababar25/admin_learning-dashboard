@@ -68,7 +68,7 @@ export default function Sidebar() {
               router.pathname === "/manage-users" ? "bg-blue-100" : ""
             }`}
           >
-            <Link href="/manage-users">
+            <Link href="/Users">
               <div
                 className={`flex items-center p-2 ${
                   router.pathname === "/manage-users"
@@ -86,7 +86,7 @@ export default function Sidebar() {
               router.pathname === "/qa-forum" ? "bg-blue-100" : ""
             }`}
           >
-            <Link href="/qa-forum">
+            <Link href="/QA">
               <div
                 className={`flex items-center p-2 ${
                   router.pathname === "/qa-forum"
@@ -104,7 +104,7 @@ export default function Sidebar() {
               router.pathname === "/privacy-policy" ? "bg-blue-100" : ""
             }`}
           >
-            <Link href="/privacy-policy">
+            <Link href="/Privacy">
               <div
                 className={`flex items-center p-2 ${
                   router.pathname === "/privacy-policy"
@@ -117,7 +117,7 @@ export default function Sidebar() {
               </div>
             </Link>
           </li>
-          <li
+          {/* <li
             className={`mb-4 ${
               router.pathname === "/terms-conditions" ? "bg-blue-100" : ""
             }`}
@@ -134,7 +134,7 @@ export default function Sidebar() {
                 Terms & Conditions
               </div>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link href="/logout">
               <div
