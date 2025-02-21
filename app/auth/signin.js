@@ -4,6 +4,68 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const elem = document.getElementById('error');
+    elem.style.display = "none"
+  
+    try {
+      const response = await fetch("https://salonapp-f05m.onrender.com/api/v1/user/login/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+      
+  
+      if (response.status === 200) {
+        // alert("Login successful");
+        elem.innerText = 'Login successful';
+        elem.style.color = 'green';
+        elem.style.display = "block";
+        setTimeout(() => {
+          window.location.href = "/Dashboard";
+      }, 1000);
+        // Redirect user or store token
+      } else if (response.status === 400) {
+        elem.innerText = 'Please Enter Email and Password';
+        elem.style.color = 'red';
+        elem.style.display = "block";
+      } else if (response.status === 401) {
+        elem.innerText = 'Invalid Credentials';
+        elem.style.color = 'red';
+        elem.style.display = "block";
+      } else if (response.status === 403) {
+        elem.innerText = 'User Unregstered. Please Verify OTP';
+        elem.style.color = 'red';
+        elem.style.display = "block";
+      } else if (response.status === 404) {
+        elem.innerText = 'No User Found With the Associated Email';
+        elem.style.color = 'red';
+        elem.style.display = "block";
+      } else {
+        elem.innerText = 'Server Error. Please Try Again';
+        elem.style.color = 'red';
+        elem.style.display = "block";
+      }
+    } catch (error) {
+        elem.innerText = 'Network Error';
+        elem.style.color = 'red';
+        elem.style.display = "block";
+    }
+  };
+  
+
 
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-white">
@@ -22,15 +84,17 @@ export default function LoginPage() {
               Login
             </h3>
 
-            <form className="space-y-6 mt-3">
+            <form onSubmit={handleSubmit} className="space-y-6 mt-3">
               <div>
                 <label className="block text-sm font-bold text-gray-700">
-                  Email address
                 </label>
                 <input
                   type="email"
                   placeholder="Enter email address"
                   className="mt-1 w-full h-12 rounded-3xl  border px-4 py-2 focus:border-yellow-500 focus:ring-yellow-500"
+                  name='email'
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -42,6 +106,9 @@ export default function LoginPage() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     className="mt-1 w-full h-12 rounded-3xl  border  px-4 py-2 focus:border-yellow-500 focus:ring-yellow-500"
+                    name='password'
+                    value={formData.password}
+                    onChange={handleChange}
                   />
                   <button
                     type="button"
@@ -50,6 +117,9 @@ export default function LoginPage() {
                   >
                     {showPassword ? "🙈" : "👁️"}
                   </button>
+                  <label className="block text-sm font-bold text-red-700" id="error" style={{display: "none"}}>
+                  Email address
+                </label>
                 </div>
               </div>
               <div className="flex items-center justify-between">
@@ -64,14 +134,15 @@ export default function LoginPage() {
                   Forgot your password?
                 </a>
               </div>
-              <Link href="/Dashboard">
+              {/* <Link href="/Dashboard"> */}
                 <button
                   className="w-full h-12 rounded-3xl bg-gradient-to-r from-[#dab866] 
                 to-[#be9337] py-2 text-white font-medium hover:bg-yellow-600"
+                type="submit"
                 >
                   Sign In
                 </button>
-              </Link>
+              {/* </Link> */}
             </form>
 
             {/* <div className="my-6 flex items-center">
