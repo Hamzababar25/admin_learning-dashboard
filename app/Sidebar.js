@@ -11,6 +11,7 @@ import {
   faFileContract,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { MdInterests } from "react-icons/md";
 
 export default function Sidebar() {
   const router = useRouter();
@@ -114,6 +115,24 @@ export default function Sidebar() {
               >
                 <FontAwesomeIcon icon={faShieldAlt} className="mr-2" />
                 Privacy Policy
+              </div>
+            </Link>
+          </li>
+          <li
+            className={`mb-4 ${
+              router.pathname === "/interests" ? "bg-blue-100" : ""
+            }`}
+          >
+            <Link href="/Interests">
+              <div
+                className={`flex items-center p-2 ${
+                  router.pathname === "/interests"
+                    ? "text-blue-600"
+                    : "text-gray-700"
+                } hover:text-blue-600`}
+              >
+                <MdInterests className="mr-2" />
+                Interests
               </div>
             </Link>
           </li>
