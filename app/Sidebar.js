@@ -65,6 +65,24 @@ export default function Sidebar() {
           </li>
           <li
             className={`mb-4 ${
+              router.pathname === "/manage-interest" ? "bg-blue-100" : ""
+            }`}
+          >
+            <Link href="/Interest">
+              <div
+                className={`flex items-center p-2 ${
+                  router.pathname === "/manage-interest"
+                    ? "text-blue-600"
+                    : "text-gray-700"
+                } hover:text-blue-600`}
+              >
+                <FontAwesomeIcon icon={faBook} className="mr-2" />
+                Manage Interest
+              </div>
+            </Link>
+          </li>
+          <li
+            className={`mb-4 ${
               router.pathname === "/manage-users" ? "bg-blue-100" : ""
             }`}
           >

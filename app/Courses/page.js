@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import { faCog, faBell } from "@fortawesome/free-solid-svg-icons";
@@ -94,13 +95,11 @@ const ManageCourses = () => {
               <FontAwesomeIcon icon={faCog} className="w-5 h-5" />
             </button>
 
-            {/* Bell Icon with Notification */}
             <button className="relative text-gray-600 hover:text-gray-800">
               <FontAwesomeIcon icon={faBell} className="w-5 h-5" />
               <span className="absolute top-0 right-0 inline-block w-2.5 h-2.5 bg-red-500 rounded-full"></span>
             </button>
 
-            {/* Profile */}
             <div className="flex items-center space-x-3">
               <img
                 src="https://via.placeholder.com/32"
@@ -115,8 +114,6 @@ const ManageCourses = () => {
           </div>
         </header>
         <div className="flex justify-between items-center mt-4 px-9 pr-16">
-          {/* Search Bar */}
-
           <div className="flex items-center border border-gray-300 rounded-3xl px-4 py-2 w-1/4 space-x-4">
             <IoIosSearch />
             <input
@@ -126,7 +123,6 @@ const ManageCourses = () => {
             />
           </div>
 
-          {/* Actions */}
           <div className="flex items-center space-x-4">
             <button className="text-gray-500 hover:text-yellow-500 transition">
               <i className="fas fa-th-large"></i>
