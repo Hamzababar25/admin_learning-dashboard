@@ -11,13 +11,15 @@ export function DataTableToolbar({ table, searchPlaceholder }) {
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
-        <Search className="h-4 w-4" />
-        <Input
-          placeholder={searchPlaceholder}
-          value={table.getState().globalFilter ?? ""}
-          onChange={(event) => table.setGlobalFilter(event.target.value)}
-          className="h-[40px] w-full sm:w-[300px] rounded-full"
-        />
+        <div className="relative w-full sm:w-[300px]">
+          <Search className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none" />
+          <Input
+            placeholder={searchPlaceholder}
+            value={table.getState().globalFilter ?? ""}
+            onChange={(event) => table.setGlobalFilter(event.target.value)}
+            className="h-[38px] pl-9 w-full rounded-full"
+          />
+        </div>
         {isFiltered && (
           <Button
             variant="ghost"
