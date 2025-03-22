@@ -1,46 +1,42 @@
-// import Sidebar from "@/app/Sidebar";
-
-// export default function Layout({ children }) {
-//   const pathname = usePathname();
-
-//   // Define routes where you do NOT want to apply the layout
-//   const noLayoutRoutes = ["/auth/signin", "/", "/signup", "/auth/forgot"];
-
-//   // Check if the current route is in noLayoutRoutes
-//   const isNoLayoutRoute = noLayoutRoutes.includes(pathname);
-//   return (
-
-//     <div className="flex">
-//       <Sidebar />
-//       <main className="ml-64 w-full pl-4 bg-gray-50 min-h-screen">
-//         {children}
-//       </main>
-//     </div>
-//   );
-// }
 "use client";
 
 import Sidebar from "@/app/Sidebar";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function Layout({ children }) {
   const pathname = usePathname();
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Define routes where you do NOT want to apply the layout
   const noLayoutRoutes = ["/"];
 
-  // Check if the current route is in noLayoutRoutes
   const isNoLayoutRoute = noLayoutRoutes.includes(pathname);
 
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       {!isNoLayoutRoute && <Sidebar />}
       <main
         className={`${
-          isNoLayoutRoute ? "w-full" : "ml-64 pl-4 w-full"
-        } bg-gray-50 min-h-screen`}
+          isNoLayoutRoute
+            ? "w-full"
+            : isMobile
+            ? "w-full pt-16"
+            : "md:ml-64 w-full"
+        } transition-all duration-300 ease-in-out flex-grow overflow-x-hidden`}
       >
-        {children}
+        <div className="">{children}</div>
       </main>
     </div>
   );

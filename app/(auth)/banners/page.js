@@ -1,17 +1,17 @@
 "use client";
 import React from "react";
-import { InterestsTable } from "@/components/interest-table";
 import Header from "@/components/ui/header/header";
+import { BannersTable } from "@/components/banner-table";
 
-const ManageInterest = () => {
+const ManageBanner = () => {
   return (
     <div className="min-h-screen">
       <div className="bg-white  rounded-lg">
-        <Header title={"Manage Interests"} />
-        <InterestsTable />
+        <Header title={"Banners"} />
+        <BannersTable />
       </div>
     </div>
   );
 };
 
-export default ManageInterest;
+export default ManageBanner;
